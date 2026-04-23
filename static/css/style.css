@@ -1,0 +1,320 @@
+/* =========================================
+   CSS Variables
+   ========================================= */
+:root {
+    --bg-main: #37393b;
+    --bg-card: rgba(36, 37, 38, 0.9);
+    --text-main: #e4e6eb;
+    --text-muted: #b0b3b8;
+    --border-color: #3e4042;
+    --primary-color: #ff4b4b;
+    --primary-hover: #e63e3e;
+    --secondary-bg: #3a3b3c;
+    --secondary-hover: #4e4f50;
+    --secondary-text: #e4e6eb;
+    --shadow-main: rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   Base Styles & Typography
+   ========================================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    padding: 2rem;
+    padding-top: 1rem;
+}
+
+aside {
+    height: 4rem;
+}
+
+h1,
+h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* =========================================
+   Main Layout
+   ========================================= */
+.main-wrapper {
+    display: flex;
+    gap: 2rem;
+    width: 80rem;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.column {
+    padding: 2rem;
+    border-radius: 0.75rem;
+    /* 12px */
+    box-shadow: 0 0.5rem 1.5rem var(--shadow-main);
+    /* 8px 24px */
+    background: var(--bg-card);
+    backdrop-filter: blur(5px);
+}
+
+.generator-col {
+    flex: 0 0 40%;
+    text-align: center;
+}
+
+.board-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    height: 28rem;
+}
+
+/* =========================================
+   Components: Media
+   ========================================= */
+.meme-image {
+    width: 20rem;
+    height: auto;
+    max-height: 25rem;
+    /* 400px */
+    object-fit: cover;
+    border-radius: 0.5rem;
+    /* 8px */
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+/* =========================================
+   Components: Buttons
+   ========================================= */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    /* ~12px */
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    /* 12px 20px */
+    border-radius: 0.375rem;
+    /* 6px */
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-bg);
+    color: var(--secondary-text);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    margin: 0 auto;
+    display: flex;
+    width: fit-content;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+/* =========================================
+   Components: Pagination
+   ========================================= */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    /* ~16px */
+    margin-top: 2rem;
+}
+
+.page-info {
+    font-weight: bold;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   Components: Favorites Board
+   ========================================= */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+    /* 150px -> ~152px */
+    gap: 1rem;
+    /* ~16px */
+}
+
+.favorite-item {
+    position: relative;
+}
+
+.favorite-item img {
+    width: 100%;
+    height: 9.5rem;
+    /* 150px */
+    object-fit: cover;
+    border-radius: 0.5rem;
+    /* 8px */
+    box-shadow: 0 0.125rem 0.3rem var(--shadow-main);
+    /* 2px 5px */
+    transition: transform 0.2s;
+}
+
+.favorite-item a {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    background-color: rgba(75, 195, 255, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 1.5rem;
+    /* ~24px */
+    height: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.favorite-item a:hover {
+    background-color: rgba(75, 195, 255, 1);
+}
+
+.favorite-item img:hover {
+    transform: scale(1.05);
+}
+
+.btn-delete {
+    position: absolute;
+    top: 0.3rem;
+    /* 5px */
+    right: 0.3rem;
+    /* 5px */
+    background-color: rgba(255, 75, 75, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 1.5rem;
+    /* ~24px */
+    height: 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: var(--primary-hover);
+}
+
+/* =========================================
+   Component: Editor
+   ========================================= */
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+    border-radius: 0.75rem;
+    /* 12px */
+    box-shadow: 0 0.5rem 1.5rem var(--shadow-main);
+    /* 8px 24px */
+    background: var(--bg-card);
+    backdrop-filter: blur(5px);
+    padding: 2rem;
+}
+
+.editor-container__btn-container {
+    width: 30rem;
+    margin-bottom: 1rem;
+}
+
+.editor-container__btn-container a {
+    color: var(--primary-color);
+}
+
+.editor-container .meme-image {
+    height: 100%;
+}
+
+.preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview__btns-container {
+    width: 30rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.meme-text {
+    margin-bottom: 1rem;
+    height: 1.5rem;
+    width: 14rem;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    /* 4px */
+    padding: 0.3rem 0.6rem;
+    /* 5px 10px */
+}
+
+/* =========================================
+   Responsive Design
+   ========================================= */
+@media (max-width: 768px) {
+    .main-wrapper {
+        flex-direction: column;
+        width: auto;
+        align-items: center;
+    }
+
+    .generator-col,
+    .board-col {
+        flex: 100%;
+        width: auto;
+    }
+
+    .favorites-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+}

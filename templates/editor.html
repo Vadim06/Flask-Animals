@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Editor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div>
+        <div class="editor-container">
+            {% if image_url %}
+            <div class="editor-container__btn-container">
+                <a href="/">← Back to Dashboard</a>
+            </div>
+            <h1>Add a Caption</h1>
+            <div class="editor-layout">
+                <div class="preview">
+                    {% if meme_generated %}
+                    <h3>Your Result:</h3>
+                    <img src="{{ url_for('static', filename='uploads/current_meme.jpg') }}?{{ range(1, 1000) | random }}"
+                        class="meme-image" alt="Generated Meme">
+                    <div>
+                        <div class="preview__btns-container">
+                            <form action="/generate" method="POST">
+                                <input type="hidden" name="image_url" value="{{ image_url }}">
+                                <input type="text" name="meme_text" class="meme-text"
+                                    placeholder="Write a funny caption..." required>
+                                <button type="submit" class="btn btn-primary">Generate!</button>
+                            </form>
+                            <a href="{{ url_for('static', filename='uploads/current_meme.jpg') }}" download
+                                class="btn btn-secondary">Download Image</a>
+                        </div>
+                        {% else %}
+                        <h3>Preview:</h3>
+                        <img src="{{ image_url }}" class="meme-image" alt="Meme Preview">
+                        <form action="/generate" method="POST">
+                            <input type="hidden" name="image_url" value="{{ image_url }}">
+                            <input type="text" name="meme_text" class="meme-text" placeholder="Write a funny caption..."
+                                required>
+                            <button type="submit" class="btn btn-primary">Generate!</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                {% else %}
+                <p>Please select an image from the dashboard first.</p>
+                {% endif %}
+            </div>
+        </div>
+</body>
+
+</html>

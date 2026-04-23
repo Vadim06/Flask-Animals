@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Meme Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <aside>
+        {% if show_cats %}
+        <a href="{{ url_for('index', animal='dogs', new=1) }}" class="btn btn-primary">Switch to Dogs</a>
+        {% else %}
+        <a href="{{ url_for('index', animal='cats', new=1) }}" class="btn btn-primary">Switch to Cats</a>
+        {% endif %}
+    </aside>
+
+    <div class="main-wrapper">
+        <div class="column generator-col">
+            {% if show_cats %}
+            <h1>Random Cat</h1>
+            {% else %}
+            <h1>Random Dog</h1>
+            {% endif %}
+
+            {% if image_url %}
+            <img src="{{ image_url }}" alt="Random Animal" class="meme-image">
+
+            <div class="actions">
+                <a href="{{ url_for('index', new=1) }}" class="btn btn-secondary">Next Image</a>
+
+                <form action="/save" method="POST" style="display:inline;">
+                    <input type="hidden" name="image_url" value="{{ image_url }}">
+                    <button type="submit" class="btn btn-primary">❤️ Save to Board</button>
+                </form>
+            </div>
+            {% else %}
+            <p>Sorry, failed to load the image from the API.</p>
+            {% endif %}
+        </div>
+
+        <div class="column board-col">
+            <div>
+                <h2>My Favorites</h2>
+
+                {% if favorites %}
+                <div class="favorites-grid">
+                    {% for fav_url in favorites %}
+                    <div class="favorite-item">
+                        <img src="{{ fav_url }}" alt="Favorite Animal">
+
+                        <a href="{{ url_for('editor', url=fav_url) }}" class="btn-edit" title="Edit">✎</a>
+                        <form action="/delete" method="POST" class="delete-form">
+                            <input type="hidden" name="image_url" value="{{ fav_url }}">
+                            <button type="submit" class="btn-delete" title="Delete">×</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if total_pages > 1 %}
+            <div class="pagination">
+                {% if has_prev %}
+                <a href="{{ url_for('index', page=page-1) }}" class="btn btn-secondary">← Previous</a>
+                {% endif %}
+
+                <span class="page-info">Page {{ page }} of {{ total_pages }}</span>
+
+                {% if has_next %}
+                <a href="{{ url_for('index', page=page+1) }}" class="btn btn-secondary">Next →</a>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% else %}
+            <p>Nothing here yet. Click the heart next to a photo!</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
