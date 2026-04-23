@@ -231,8 +231,8 @@ def generate():
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     img.save(save_path)
 
-    return render_template("editor.html", image_url=image_url, meme_generated=True)
+    return render_template(
+        "editor.html", image_url=image_url, meme_generated=True)
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+app = Flask(__name__)
