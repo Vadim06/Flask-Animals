@@ -235,4 +235,5 @@ def generate():
         "editor.html", image_url=image_url, meme_generated=True)
 
 
-app = Flask(__name__)
+if __name__ == "__main__":
+    app.run(debug=True)
