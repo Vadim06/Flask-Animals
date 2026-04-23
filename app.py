@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from PIL import Image, ImageDraw, ImageFont
 
 load_dotenv()
+app = Flask(__name__)
 
 app = Flask(__name__)
 app.secret_key = "skibidiOpaPa"
