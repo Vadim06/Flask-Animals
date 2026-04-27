@@ -8,8 +8,6 @@ from PIL import Image, ImageDraw, ImageFont
 
 load_dotenv()
 app = Flask(__name__)
-
-app = Flask(__name__)
 app.secret_key = "skibidiOpaPa"
 
 API_KEY = os.getenv("API_KEY")
